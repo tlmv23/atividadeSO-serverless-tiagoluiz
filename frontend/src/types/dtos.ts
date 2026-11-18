@@ -208,6 +208,22 @@ export interface RotaNoMapaDTO
   polyline: string | null;
 }
 
+/** Plano de transporte devolvido pela função serverless da HU-07. */
+export interface GuiaDeTransporteDTO
+{
+  origemId: string;
+  destinoId: string;
+  rota: RotaNoMapaDTO;
+  equipamento: string;
+  cadeiaFria: {
+    temperaturaMinimaCelsius: number;
+    temperaturaMaximaCelsius: number;
+    controle: string;
+  };
+  prioridadeDeEnvio: "FEFO";
+  checklist: string[];
+}
+
 export type StatusTransferenciaBackend = "EM_TRANSITO" | "RECEBIDA" | "CANCELADA";
 
 /** Uma bolsa saindo do hemocentro para um hospital pela tela de Rede (PI3-236). */

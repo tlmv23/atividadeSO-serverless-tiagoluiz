@@ -33,7 +33,10 @@ import type {
   StatusTransferenciaBackend,
   TransferenciaDTO,
   DiagnosticoDados,
+  GuiaDeTransporteDTO,
+  TipoComponenteBackend,
 } from "@/types/dtos";
+import type { TipoComponente } from "@/types";
 
 // ----------------------------------------------------------------------
 // Funções de Chamada à API
@@ -119,6 +122,34 @@ export async function calcularRota(origemId: string, destinoId: string): Promise
 export async function calcularRotaNoMapa(origemId: string, destinoId: string): Promise<RotaNoMapaDTO>
 {
   return clienteHttp.get<RotaNoMapaDTO>("/rotas/trajeto", { params: { origemId, destinoId }, silencioso: true });
+}
+
+const TIPO_COMPONENTE_POR_NOME: Record<TipoComponente, TipoComponenteBackend> =
+{
+  "Concentrado de Hemácias": "HEMACIAS",
+  "Plasma Fresco Congelado": "PLASMA",
+  "Concentrado de Plaquetas": "PLAQUETAS",
+  "Crioprecipitado": "CRIOPRECIPITADO",
+};
+
+/**
+ * Pede ao Worker uma guia a partir da rota já calculada e autenticada pela API do Rota Vital.
+ * Sem URL configurada, mantém a tela no fluxo atual sem uma chamada extra.
+ */
+export async function gerarGuiaDeTransporte(
+  rota: RotaNoMapaDTO,
+  componente: TipoComponente,
+): Promise<GuiaDeTransporteDTO | null>
+{
+  const url = import.meta.env.VITE_GUIA_TRANSPORTE_URL;
+  if (!url) return null;
+
+  return clienteHttp.post<GuiaDeTransporteDTO>(url, {
+    origemId: rota.origemId,
+    destinoId: rota.destinoId,
+    tipoComponente: TIPO_COMPONENTE_POR_NOME[componente],
+    rota,
+  }, { silencioso: true });
 }
 
 // ----------------------------------------------------------------------

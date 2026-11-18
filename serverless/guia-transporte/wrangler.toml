@@ -1,0 +1,10 @@
+name = "rotavital-guia-transporte"
+main = "src/adaptadores/http/worker.js"
+compatibility_date = "2025-03-01"
+
+[dev]
+ip = "127.0.0.1"
+port = 8787
+
+[vars]
+ALLOWED_ORIGIN = "http://localhost:5173"

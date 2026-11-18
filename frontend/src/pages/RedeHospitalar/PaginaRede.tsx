@@ -50,7 +50,8 @@ function Rede({ origemInicial, hospitais, pontos }: Readonly<{
 
   const destinos = useMemo(() => hospitais.filter((hospital) => hospital.id !== origem.id), [hospitais, origem.id]);
   const rotas = useRotasDaRede(origem.id, destinos);
-  const { rota, caminho, tracado, situacao, erro } = useRotaNoMapa(origem, destino, pontos);
+  const { rota, guia, erroGuia, caminho, tracado, situacao, erro } =
+    useRotaNoMapa(origem, destino, pontos, componente);
 
   const { usuario } = useAutenticacao();
   const { recarregarEstoque } = useDados();
@@ -191,6 +192,8 @@ function Rede({ origemInicial, hospitais, pontos }: Readonly<{
           origem={origem}
           destino={destino}
           rota={rota}
+          guia={guia}
+          erroGuia={erroGuia}
           caminho={caminho}
           semRota={situacao === "erro" ? erro : "calculando…"}
           componente={componente}

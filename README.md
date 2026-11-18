@@ -59,6 +59,7 @@ npm run docker:local        # banco + API + site → http://localhost:8080
 | 9 | [🖼️ Figma × Sistema Real](#figma-vs-real) | Protótipo lado a lado com as telas rodando |
 | 10 | [📚 Documentação](#documentacao) | Índice dos documentos técnicos em `docs/` |
 | 11 | [🐳🧪🚀 Desafio do PI](#container-tdd-deploy) | Container, TDD e deploy automatizados (Infraestrutura de Software) |
+| 12 | [☁️ Atividade Serverless](#atividade-serverless) | Guia de transporte HTTP na HU‑07, Cloudflare Workers |
 
 <h2 align="center" id="docentes">👥👨🏻‍🏫 Docentes Responsáveis: <br>
 <img src="https://img.shields.io/badge/Docentes-111827?style=flat&logo=googleclassroom&logoColor=white" height="22"/>
@@ -865,7 +866,7 @@ http://localhost:8080/versao.json.
 | | `WEB_PORT` · `API_PORT` | Portas na sua máquina: o site, com a API em `/api/` (padrão `8080`), e o acesso direto ao backend, só para depurar (padrão `8082`) |
 | | `COMPOSE_FILE` | Banco do `docker compose up` sem `-f` (`compose.yaml` ou `compose.yaml:compose.supabase.yaml`) |
 | `backend/.env` | `SUPABASE_DB_PASSWORD` · `SUPABASE_KEY` · `GOOGLE_MAPS_API_KEY` | As mesmas, para o modo desenvolvimento ([modelo](./backend/.env.example)) |
-| `frontend/.env.local` | `VITE_API_URL` · `VITE_API_TIMEOUT_MS` · `VITE_GOOGLE_MAPS_KEY` | Opcional: base da API (`/api/v1`), timeout (`10000` ms) e a chave do mapa da Rede ([modelo](./frontend/.env.example)) |
+| `frontend/.env.local` | `VITE_API_URL` · `VITE_API_TIMEOUT_MS` · `VITE_GOOGLE_MAPS_KEY` · `VITE_GUIA_TRANSPORTE_URL` | Opcional: base da API, timeout, chave do mapa e URL do Worker para a guia de transporte ([modelo](./frontend/.env.example)) |
 
 > [!WARNING]
 > O `.env` fica fora do Git. A chave **`service_role`** do Supabase ignora o RLS: nunca vai para commit ou frontend.
@@ -1142,8 +1143,17 @@ O protótipo ao lado da mesma tela rodando de verdade (prints com Playwright, 14
 | 🧾 [`evidencias/`](./docs/evidencias/) | Chamadas reais aos endpoints e prints por tarefa do Jira |
 | 🎬 [`ROTEIRO_MVP.md`](./docs/ROTEIRO_MVP.md) | Roteiro-exemplo dos screencasts e da apresentação final, ensaiado com o sistema rodando |
 | 🏗️ [`arquitetura_SO/`](./docs/arquitetura_SO/) | Planejamento da remodelagem: DDD, três camadas, microsserviços e orçamento (Trabalho U2 · Parte 2 - Infraestrutura de Software) |
+| ☁️ [`serverless/guia-transporte/README.md`](./serverless/guia-transporte/README.md) | Função HTTP Cloudflare para a guia de transporte da HU‑07: contrato, camadas, TDD e execução local |
+| 🧾 [`atividade-serverless.md`](./docs/evidencias/atividade-serverless.md) | Evidências de testes e execução local da atividade serverless |
 | 📕 [`arquitetura-rotavital-paes-silva.pdf`](./pdf/arquitetura-rotavital-paes-silva.pdf) | PDF final entregue - Atividade de Infraestrutura de Redes (RSD) |
 | 🗺️ [`arquitetura-rotavital-paes-silva.drawio`](./docs/arquitetura-rotavital-paes-silva.drawio) | Arquivo-fonte do diagrama entregue junto com o PDF (RSD) |
+
+<h2 align="center" id="atividade-serverless">☁️ Atividade individual — Guia de transporte serverless</h2>
+
+O painel da Rede pode solicitar ao **Cloudflare Worker** a guia de transporte para o hemocomponente selecionado. A função usa a rota já calculada pelo backend e devolve veículo, cadeia fria e checklist, sem duplicar o cálculo Dijkstra/Google.
+
+- Instruções, contrato HTTP e TDD: [`serverless/guia-transporte/README.md`](./serverless/guia-transporte/README.md)
+- Evidências: [`docs/evidencias/atividade-serverless.md`](./docs/evidencias/atividade-serverless.md)
 
 <h2 align="center" id="container-tdd-deploy">🐳🧪🚀 Desafio do PI — Container, TDD e Deploy automatizados <br>
 <img src="https://img.shields.io/badge/-Docker_·_TDD_·_GitHub_Actions-111827?style=flat&logo=githubactions&logoColor=2088FF" height="22"/>

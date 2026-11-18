@@ -1,6 +1,6 @@
 import { MapPin, Route, Thermometer, Truck, Waypoints } from "lucide-react";
 import type { TipoComponente } from "@/types";
-import type { PontoRedeDTO, RotaNoMapaDTO } from "@/types/dtos";
+import type { GuiaDeTransporteDTO, PontoRedeDTO, RotaNoMapaDTO } from "@/types/dtos";
 import { COMPONENTES, enderecoDoPonto, formatarFaixa, TRANSPORTE_POR_COMPONENTE } from "@/lib/rede";
 import { DESCRICAO_FONTE, formatarDistancia, formatarDuracao } from "@/lib/rotaAteHospital";
 
@@ -9,6 +9,8 @@ interface Props
   origem: PontoRedeDTO;
   destino: PontoRedeDTO;
   rota: RotaNoMapaDTO | null;
+  guia: GuiaDeTransporteDTO | null;
+  erroGuia: string | null;
   /** Pontos do menor caminho, na ordem. */
   caminho: PontoRedeDTO[];
   /** Mensagem no lugar da rota, enquanto ela é calculada ou quando não existe. */
@@ -37,7 +39,17 @@ function Linha({
 }
 
 /** Plano de transporte na cadeia fria para o hospital selecionado (HU-07). */
-export function PlanoTransporte({ origem, destino, rota, caminho, semRota, componente, onComponenteChange }: Readonly<Props>)
+export function PlanoTransporte({
+  origem,
+  destino,
+  rota,
+  guia,
+  erroGuia,
+  caminho,
+  semRota,
+  componente,
+  onComponenteChange,
+}: Readonly<Props>)
 {
   return (
     <section className="space-y-4 rounded-xl border border-rota-border bg-white p-5">
@@ -67,7 +79,7 @@ export function PlanoTransporte({ origem, destino, rota, caminho, semRota, compo
           </Linha>
         )}
         <Linha icone={<Truck className="h-4 w-4" />} rotulo="Transporte">
-          Veículo refrigerado monitorado
+          {guia?.equipamento ?? TRANSPORTE_POR_COMPONENTE[componente]}
         </Linha>
       </div>
 
@@ -95,10 +107,23 @@ export function PlanoTransporte({ origem, destino, rota, caminho, semRota, compo
         <div>
           <p className="text-sm font-semibold">Temperatura ideal de transporte</p>
           <p className="font-mono text-xs">
-            {formatarFaixa(componente)} · {TRANSPORTE_POR_COMPONENTE[componente]}
+            {guia
+              ? `${guia.cadeiaFria.temperaturaMinimaCelsius} a ${guia.cadeiaFria.temperaturaMaximaCelsius} °C · ${guia.equipamento}`
+              : `${formatarFaixa(componente)} · ${TRANSPORTE_POR_COMPONENTE[componente]}`}
           </p>
         </div>
       </div>
+
+      {erroGuia && (
+        <p role="alert" className="text-sm text-rota-red">
+          Não foi possível obter a guia serverless: {erroGuia}
+        </p>
+      )}
+      {guia && (
+        <ul aria-label="Checklist de transporte" className="space-y-1 text-xs text-gray-600">
+          {guia.checklist.map((item) => <li key={item}>• {item}</li>)}
+        </ul>
+      )}
     </section>
   );
 }

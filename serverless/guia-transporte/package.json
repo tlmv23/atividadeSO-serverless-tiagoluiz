@@ -1,0 +1,14 @@
+{
+  "name": "@rotavital/guia-transporte",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --local",
+    "test": "node --experimental-test-coverage --test",
+    "test:unit": "node --test",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
