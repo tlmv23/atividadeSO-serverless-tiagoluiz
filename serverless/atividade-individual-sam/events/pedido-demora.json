@@ -1,0 +1,10 @@
+{
+  "resource": "/guias",
+  "path": "/guias",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "{\"requisicaoId\":\"R-003\",\"demorar\":true}",
+  "isBase64Encoded": false
+}

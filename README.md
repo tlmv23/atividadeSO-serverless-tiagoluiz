@@ -59,7 +59,7 @@ npm run docker:local        # banco + API + site → http://localhost:8080
 | 9 | [🖼️ Figma × Sistema Real](#figma-vs-real) | Protótipo lado a lado com as telas rodando |
 | 10 | [📚 Documentação](#documentacao) | Índice dos documentos técnicos em `docs/` |
 | 11 | [🐳🧪🚀 Desafio do PI](#container-tdd-deploy) | Container, TDD e deploy automatizados (Infraestrutura de Software) |
-| 12 | [☁️ Atividade Serverless](#atividade-serverless) | Guia de transporte HTTP na HU‑07, Cloudflare Workers |
+| 12 | [☁️ Atividade Serverless](#atividade-serverless) | AWS SAM local: invocacao por evento, HTTP, cold start e timeout |
 
 <h2 align="center" id="docentes">👥👨🏻‍🏫 Docentes Responsáveis: <br>
 <img src="https://img.shields.io/badge/Docentes-111827?style=flat&logo=googleclassroom&logoColor=white" height="22"/>
@@ -1143,17 +1143,20 @@ O protótipo ao lado da mesma tela rodando de verdade (prints com Playwright, 14
 | 🧾 [`evidencias/`](./docs/evidencias/) | Chamadas reais aos endpoints e prints por tarefa do Jira |
 | 🎬 [`ROTEIRO_MVP.md`](./docs/ROTEIRO_MVP.md) | Roteiro-exemplo dos screencasts e da apresentação final, ensaiado com o sistema rodando |
 | 🏗️ [`arquitetura_SO/`](./docs/arquitetura_SO/) | Planejamento da remodelagem: DDD, três camadas, microsserviços e orçamento (Trabalho U2 · Parte 2 - Infraestrutura de Software) |
-| ☁️ [`serverless/guia-transporte/README.md`](./serverless/guia-transporte/README.md) | Função HTTP Cloudflare para a guia de transporte da HU‑07: contrato, camadas, TDD e execução local |
-| 🧾 [`atividade-serverless.md`](./docs/evidencias/atividade-serverless.md) | Evidências de testes e execução local da atividade serverless |
+| ☁️ [`serverless/atividade-individual-sam/README.md`](./serverless/atividade-individual-sam/README.md) | Atividade oficial: AWS SAM local, invocacao por evento e HTTP, experimentos e respostas |
+| 🧾 [`serverless/atividade-individual-sam/evidencias/`](./serverless/atividade-individual-sam/evidencias/README.md) | Capturas reais exigidas para a entrega serverless |
+| ☁️ [`serverless/guia-transporte/README.md`](./serverless/guia-transporte/README.md) | Implementacao adicional da guia integrada ao painel Rede com Cloudflare Workers |
+| 🧾 [`docs/evidencias/atividade-serverless.md`](./docs/evidencias/atividade-serverless.md) | Evidencias da implementacao adicional com Cloudflare Workers |
 | 📕 [`arquitetura-rotavital-paes-silva.pdf`](./pdf/arquitetura-rotavital-paes-silva.pdf) | PDF final entregue - Atividade de Infraestrutura de Redes (RSD) |
 | 🗺️ [`arquitetura-rotavital-paes-silva.drawio`](./docs/arquitetura-rotavital-paes-silva.drawio) | Arquivo-fonte do diagrama entregue junto com o PDF (RSD) |
 
-<h2 align="center" id="atividade-serverless">☁️ Atividade individual — Guia de transporte serverless</h2>
+<h2 align="center" id="atividade-serverless">☁️ Atividade individual — Serverless com AWS SAM local</h2>
 
-O painel da Rede pode solicitar ao **Cloudflare Worker** a guia de transporte para o hemocomponente selecionado. A função usa a rota já calculada pelo backend e devolve veículo, cadeia fria e checklist, sem duplicar o cálculo Dijkstra/Google.
+O caminho principal da atividade oficial usa **AWS SAM local** para demonstrar invocacao por evento, gatilho HTTP, reaproveitamento do ambiente e timeout, sem publicar na nuvem. A implementacao Cloudflare abaixo e uma extensao integrada ao painel Rede, nao substitui os experimentos descritos na rubrica da disciplina.
 
-- Instruções, contrato HTTP e TDD: [`serverless/guia-transporte/README.md`](./serverless/guia-transporte/README.md)
-- Evidências: [`docs/evidencias/atividade-serverless.md`](./docs/evidencias/atividade-serverless.md)
+- Instrucoes, respostas e roteiro: [`serverless/atividade-individual-sam/README.md`](./serverless/atividade-individual-sam/README.md)
+- Evidencias da atividade oficial: [`serverless/atividade-individual-sam/evidencias/README.md`](./serverless/atividade-individual-sam/evidencias/README.md)
+- Extensao Cloudflare integrada ao projeto: [`serverless/guia-transporte/README.md`](./serverless/guia-transporte/README.md)
 
 <h2 align="center" id="container-tdd-deploy">🐳🧪🚀 Desafio do PI — Container, TDD e Deploy automatizados <br>
 <img src="https://img.shields.io/badge/-Docker_·_TDD_·_GitHub_Actions-111827?style=flat&logo=githubactions&logoColor=2088FF" height="22"/>

@@ -1,0 +1,10 @@
+{
+  "resource": "/guias",
+  "path": "/guias",
+  "httpMethod": "POST",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "{\"requisicaoId\":\"R-001\",\"hospital\":\"H-Recife\",\"bolsas\":[\"O-NEG-0142\"]}",
+  "isBase64Encoded": false
+}
