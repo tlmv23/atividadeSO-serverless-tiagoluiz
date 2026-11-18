@@ -101,8 +101,8 @@ Uma resposta bem-sucedida usa HTTP 201. O corpo inclui `guia`, `hospital`, `bols
 
 | Modo | Valores de `invocacaoNesteAmbiente` observados |
 | :--- | :--- |
-| Sem `--warm-containers` | preencher |
-| Com `--warm-containers LAZY` | preencher |
+| Sem `--warm-containers` | 1,1,1... |
+| Com `--warm-containers LAZY` | 1,2,3... |
 
 ## Experimento de timeout
 
