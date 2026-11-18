@@ -54,8 +54,8 @@ Registre os dois tempos reais na tabela. A primeira invocacao costuma incluir o 
 
 | Invocacao | Tempo observado |
 | :--- | :--- |
-| Primeira | preencher |
-| Segunda | preencher |
+| Primeira | 8.154 |
+| Segunda | 8.214 |
 
 Opcionalmente, gere de novo o evento no formato do API Gateway:
 
@@ -151,6 +151,8 @@ Declare com suas palavras as ferramentas de IA usadas, para que foram usadas e c
 ## Evidencias e video
 
 Salve capturas reais em [`evidencias/`](evidencias/README.md), incluindo os tempos, o contador, a chamada HTTP e o timeout antes e depois do ajuste.
+<img width="1167" height="506" alt="image" src="https://github.com/user-attachments/assets/21fa1030-c26a-4947-aed4-f4c9cc9d32d1" />
+
 
 No video de ate 3 minutos, mostre:
 
